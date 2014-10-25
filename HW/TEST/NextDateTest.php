@@ -3,6 +3,29 @@
 require_once __DIR__ . '/../NextDate.php';
 
 class NextDateTest extends PHPUnit_Framework_TestCase {
+
+	private function ValidateFunc($thisSet="",$expected="",$e=""){
+		switch ($thisSet) {
+			case 1:
+			if ($expected == "ok") {//Detected(no error)
+				echo "no_msg(",$expected,")->OK", "\n";//達到預期效果，assert OK
+			} else {
+				echo "no_msg(",$expected,")->X!", "\n";//非預期效果，assert 有問題
+			}
+			$this -> assertFalse(false);
+			break;
+
+			case 2:
+			if ($expected == "error") {//Detected(have error)
+				echo "msg(",$e -> getMessage(),")->OK", "\n";//達到預期效果，assert OK
+			} else {
+				echo "msg(",$e -> getMessage(),")->X!", "\n";//非預期效果，assert 有問題
+			}
+			$this -> assertTrue(true);
+			break;
+        }
+    }
+
 	public function setUp() {
         $this -> nextdate = new NextDate();
     }
@@ -89,61 +112,41 @@ class NextDateTest extends PHPUnit_Framework_TestCase {
      * @dataProvider myProviderInt
      */
     public function testValidateInt($a='a',$b=1,$c=1,$expected='error'){
-		echo __FUNCTION__,"(",$a,",",$b,",",$c,",",$expected,") --> " ;
+		echo __FUNCTION__,"(",$a,",",$b,",",$c,",",$expected,") --> ";
         try {
 			$this -> nextdate -> validateInt($a,$b,$c);
-			if ($expected == "ok") {//Detected(no error)
-				echo "no_msg(",$expected,")->OK", "\n";//達到預期效果，assert OK
-			} else {
-				echo "no_msg(",$expected,")->X!", "\n";//非預期效果，assert 有問題
-			}
-			$this -> assertFalse(false);
+			$this -> ValidateFunc(1,$expected);
         } catch(Exception $e) {
-			if ($expected == "error") {//Detected(have error)
-				echo "msg(",$e -> getMessage(),")->OK", "\n";//達到預期效果，assert OK
-			} else {
-				echo "msg(",$e -> getMessage(),")->X!", "\n";//非預期效果，assert 有問題
-			}
-			$this -> assertTrue(true);
+			$this -> ValidateFunc(2,$expected,$e);
         }
     }
 	
     /**
      * @dataProvider myProviderRange
      */
-    public function testValidateRange($a='0',$b=0,$c=0,$expected='error'){
-		echo __FUNCTION__,"(",$a,",",$b,",",$c,",",$expected,") --> " ;
+    public function testValidateRange($a=2020,$b=0,$c=0,$expected='error'){
+		echo __FUNCTION__,"(",$a,",",$b,",",$c,",",$expected,") --> ";
         try {
 			$this -> nextdate -> validateRange($a,$b,$c);
-			if ($expected == "ok") {//Detected(no error)
-				echo "no_msg(",$expected,")->OK", "\n";//達到預期效果，assert OK
-			} else {
-				echo "no_msg(",$expected,")->X!", "\n";//非預期效果，assert 有問題
-			}
-			$this -> assertFalse(false);
+			$this -> ValidateFunc(1,$expected);
         } catch(Exception $e) {
-			if ($expected == "error") {//Detected(have error)
-				echo "msg(",$e -> getMessage(),")->OK", "\n";//達到預期效果，assert OK
-			} else {
-				echo "msg(",$e -> getMessage(),")->X!", "\n";//非預期效果，assert 有問題
-			}
-			$this -> assertTrue(true);
+			$this -> ValidateFunc(2,$expected,$e);
         }
     }
     /**
      * @dataProvider myProviderNextDate
      */
 	public function testNextDate($a=2014,$b=10,$c=25,$expected="2014-10-26") {
-		echo __FUNCTION__,"(",$a,",",$b,",",$c,",",$expected,") --> " ;
+		echo __FUNCTION__,"(",$a,",",$b,",",$c,",",$expected,") --> ";
 		try {
 			$this -> assertEquals($expected, $this -> nextdate -> calNextDate($a, $b, $c));
 			echo "result(",$expected,")->OK", "\n";//達到預期效果，assert OK
 			//$this -> assertFalse(false);
 		} catch(Exception $e) {
 			echo "result(",$this -> nextdate -> calNextDate($a, $b, $c),")->X!", "\n";//非預期效果，assert 有問題
+			//echo 'msg: ',  $e -> getMessage(), "\n";
 			//$this -> assertTrue(true);
         }
-		
     }
-	
 }
+?>
