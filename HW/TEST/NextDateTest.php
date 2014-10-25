@@ -67,11 +67,9 @@ class NextDateTest extends PHPUnit_Framework_TestCase {
 			array(1000, 1, 31, "ok"),
 			array(1000, 0, 1, "error"),
 			array(1000, 1, 0, "error"),
-		
         );
     }
 
-	
 	public function myProviderNextDate(){
 		return array(
 			array(2014, 12, 30, "2014-12-31"),
@@ -84,7 +82,6 @@ class NextDateTest extends PHPUnit_Framework_TestCase {
 			array(2015, 1, 31, "2015-2-1"),
 			array(2016, 4, 29, "2016-4-30"),
 			array(2017, 4, 30, "2017-5-1"),
-		 
         );
     }
 
@@ -139,12 +136,12 @@ class NextDateTest extends PHPUnit_Framework_TestCase {
 	public function testNextDate($a=2014,$b=10,$c=25,$expected="2014-10-26") {
 		echo __FUNCTION__,"(",$a,",",$b,",",$c,",",$expected,") --> " ;
 		try {
-			$this -> assertEquals($expected,$this -> nextdate -> calNextDate($a, $b, $c));
+			$this -> assertEquals($expected, $this -> nextdate -> calNextDate($a, $b, $c));
 			echo "result(",$expected,")->OK", "\n";//達到預期效果，assert OK
 			//$this -> assertFalse(false);
 		} catch(Exception $e) {
 			echo "result(",$this -> nextdate -> calNextDate($a, $b, $c),")->X!", "\n";//非預期效果，assert 有問題
-           //$this -> assertTrue(true);
+			//$this -> assertTrue(true);
         }
 		
     }
