@@ -1,8 +1,9 @@
 <?php
-class NextDate {
 /**  
 * NextDate
 */
+class NextDate {
+
     public function validateInt($a, $b, $c) {
 		if(!is_int($a) || !is_int($b) || !is_int($c)) {
 			throw new Exception("error int");
@@ -80,8 +81,5 @@ class NextDate {
 		$result = (string)($a."-".$b."-".$c);
 		return $result;
     }
-   
 }
-
-
 ?>
