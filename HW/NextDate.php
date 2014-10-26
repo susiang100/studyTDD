@@ -37,7 +37,7 @@ class NextDate {
 					throw new Exception('error day');
 				}
 			}
-		} else if (($a < $V1_a || $a > $V2_a)) {//error year
+		} else {// if (($a < $V1_a || $a > $V2_a)) {//error year
 			if ($c>=1) {//error year >> ok day(Min:1)
 				if ( ($b<$V1_b) || ($b>$V2_b) ) {//error year >> ok day(Min:1) >> error month(Min:1,Max:12)
 					throw new Exception('error year, month');
