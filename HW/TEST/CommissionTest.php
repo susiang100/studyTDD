@@ -113,7 +113,7 @@ class CommissionTest extends PHPUnit_Framework_TestCase {
     /**
      * @dataProvider myProviderNextDate
      */
-	public function testCommission($a=1,$b=1,$c=1,$expected="2014-10-26") {
+	public function testCommission($a=1,$b=1,$c=1,$expected=10) {
 		echo __FUNCTION__,"(",$a,",",$b,",",$c,",",$expected,") --> ";
 		try {
 			$this -> assertEquals($expected, $this -> commission -> calCommission($a, $b, $c));
